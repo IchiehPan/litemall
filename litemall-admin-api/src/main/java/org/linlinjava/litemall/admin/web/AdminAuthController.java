@@ -102,7 +102,8 @@ public class AdminAuthController {
 
         HttpSession session = request.getSession();
         String kaptcha = (String)session.getAttribute("kaptcha");
-        if (Objects.requireNonNull(code).compareToIgnoreCase(kaptcha) != 0) {
+        //TODO 由于跨域问题不能用传统的sessionId方案校验验证码
+        if (kaptcha != null && Objects.requireNonNull(code).compareToIgnoreCase(kaptcha) != 0) {
             return ResponseUtil.fail(ADMIN_INVALID_KAPTCHA, "验证码不正确", doKaptcha(request));
         }
 
