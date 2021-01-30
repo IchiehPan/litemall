@@ -18,6 +18,7 @@ public class AdminWebSessionManager extends DefaultWebSessionManager {
     public AdminWebSessionManager() {
         super();
         setGlobalSessionTimeout(MILLIS_PER_HOUR * 6);
+        //shiro 的session默认放在cookie中 禁用
 //        setSessionIdCookieEnabled(false);
         setSessionIdUrlRewritingEnabled(false);
     }

@@ -26,6 +26,7 @@
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="deleted" jdbcType="BIT" property="deleted" />
+    <result column="mall_id" jdbcType="INTEGER" property="mallId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <!--
@@ -138,7 +139,7 @@
     -->
     id, `name`, `desc`, tag, total, discount, `min`, `limit`, `type`, `status`, goods_type, 
     goods_value, code, time_type, `days`, start_time, end_time, add_time, update_time, 
-    deleted
+    deleted, mall_id
   </sql>
   <select id="selectByExample" parameterType="org.linlinjava.litemall.db.domain.LitemallCouponExample" resultMap="BaseResultMap">
     <!--
@@ -265,14 +266,16 @@
       goods_type, goods_value, 
       code, time_type, `days`, 
       start_time, end_time, add_time, 
-      update_time, deleted)
+      update_time, deleted, mall_id
+      )
     values (#{name,jdbcType=VARCHAR}, #{desc,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
       #{total,jdbcType=INTEGER}, #{discount,jdbcType=DECIMAL}, #{min,jdbcType=DECIMAL}, 
       #{limit,jdbcType=SMALLINT}, #{type,jdbcType=SMALLINT}, #{status,jdbcType=SMALLINT}, 
       #{goodsType,jdbcType=SMALLINT}, #{goodsValue,jdbcType=VARCHAR,typeHandler=org.linlinjava.litemall.db.mybatis.JsonIntegerArrayTypeHandler}, 
       #{code,jdbcType=VARCHAR}, #{timeType,jdbcType=SMALLINT}, #{days,jdbcType=SMALLINT}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{addTime,jdbcType=TIMESTAMP}, 
-      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT})
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=BIT}, #{mallId,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="org.linlinjava.litemall.db.domain.LitemallCoupon">
     <!--
@@ -341,6 +344,9 @@
       <if test="deleted != null">
         deleted,
       </if>
+      <if test="mallId != null">
+        mall_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="name != null">
@@ -399,6 +405,9 @@
       </if>
       <if test="deleted != null">
         #{deleted,jdbcType=BIT},
+      </if>
+      <if test="mallId != null">
+        #{mallId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -479,6 +488,9 @@
       <if test="record.deleted != null">
         deleted = #{record.deleted,jdbcType=BIT},
       </if>
+      <if test="record.mallId != null">
+        mall_id = #{record.mallId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -509,7 +521,8 @@
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       add_time = #{record.addTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      deleted = #{record.deleted,jdbcType=BIT}
+      deleted = #{record.deleted,jdbcType=BIT},
+      mall_id = #{record.mallId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -578,6 +591,9 @@
       <if test="deleted != null">
         deleted = #{deleted,jdbcType=BIT},
       </if>
+      <if test="mallId != null">
+        mall_id = #{mallId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -605,7 +621,8 @@
       end_time = #{endTime,jdbcType=TIMESTAMP},
       add_time = #{addTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
-      deleted = #{deleted,jdbcType=BIT}
+      deleted = #{deleted,jdbcType=BIT},
+      mall_id = #{mallId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectOneByExample" parameterType="org.linlinjava.litemall.db.domain.LitemallCouponExample" resultMap="BaseResultMap">
