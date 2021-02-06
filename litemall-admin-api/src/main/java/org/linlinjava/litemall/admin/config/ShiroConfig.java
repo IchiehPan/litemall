@@ -31,6 +31,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         filterChainDefinitionMap.put("/admin/auth/kaptcha", "anon");
         filterChainDefinitionMap.put("/admin/auth/login", "anon");
+        filterChainDefinitionMap.put("/admin/multimall/auth/login", "anon");
         filterChainDefinitionMap.put("/admin/auth/401", "anon");
         filterChainDefinitionMap.put("/admin/auth/index", "anon");
         filterChainDefinitionMap.put("/admin/auth/403", "anon");
